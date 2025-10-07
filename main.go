@@ -38,5 +38,5 @@ func loop(reader *bufio.Reader) {
 		sum = sum.Add(num)
 	}
 
-	fmt.Printf("= %s\n\n", sum.StringFixed(2))
+	fmt.Printf("=\n%s\n\n", sum.StringFixed(2))
 }
