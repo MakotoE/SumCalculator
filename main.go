@@ -4,8 +4,9 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strconv"
 	"strings"
+
+	"github.com/shopspring/decimal"
 )
 
 func main() {
@@ -13,7 +14,7 @@ func main() {
 
 	for {
 		fmt.Println("Enter numbers (press Enter on empty line to calculate):")
-		var sum float64
+		sum := decimal.NewFromInt(0)
 
 		for {
 			input, _ := reader.ReadString('\n')
@@ -23,15 +24,15 @@ func main() {
 				break
 			}
 
-			num, err := strconv.ParseFloat(input, 64)
+			num, err := decimal.NewFromString(input)
 			if err != nil {
 				fmt.Println("Invalid number, try again.")
 				continue
 			}
 
-			sum += num
+			sum = sum.Add(num)
 		}
 
-		fmt.Printf("= %.2f\n\n", sum)
+		fmt.Printf("= %s\n\n", sum.StringFixed(2))
 	}
 }
